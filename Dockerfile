@@ -16,7 +16,10 @@ CMD ["/usr/bin/supervisord", "-n"]
 #SSHD
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server && \
 	mkdir /var/run/sshd && chmod 700 /var/run/sshd && \
-	echo 'root:root' |chpasswd
+	echo 'root:root' |chpasswd && \
+	sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+	sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config && \
+	sed -ri 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 
 #Utilities
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y less nano ntp net-tools inetutils-ping curl git telnet openjdk-7-jre-headless tzdata-java
