@@ -61,7 +61,7 @@ RUN cd /docker-elk && \
     cp opush /logstash/patterns/opush && \
     cp logstash-forwarder.crt /logstash/logstash-forwarder.crt && \
     cp logstash-forwarder.key /logstash/logstash-forwarder.key && \
-    cp commands.json /kibana/app/dashboards/commands.json
+    cp opush_stats.json /kibana/app/dashboards/opush_stats.json
 
 #80=ngnx, 9200=elasticsearch
 EXPOSE 22 80 9200

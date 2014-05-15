@@ -1,3 +1,4 @@
+WORD \b\w+\b
 DIGIT [0-9]
 DOUBLEDIGIT %{DIGIT}{2}
 TRIPLEDIGIT %{DIGIT}{3}
@@ -17,3 +18,6 @@ NOTSPACE [^ ]*
 DATETIME %{NOTSPACE:date} %{NOTSPACE:time}
 FILE_DATE %{FOURDIGIT}-%{DOUBLEDIGIT}-%{DOUBLEDIGIT}
 LOG_HEADER ^%{OPUSHTIME:opushtime} %{OPUSHLOGLEVEL} %{OPUSHLOGGER} %{OPUSHINFO}
+_OBM_SYNC_REQ /%{WORD:obm_sync_req_namespace}/%{WORD:obm_sync_req_action}
+OBM_SYNC_REQ %{_OBM_SYNC_REQ:obm_sync_req}, request %{VERYGREEDYDATA:obm_sync_req_json}
+OBM_SYNC_REP %{VERYGREEDYDATA:obm_sync_reply}
